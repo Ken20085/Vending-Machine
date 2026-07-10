@@ -5,10 +5,6 @@ public class Denomination {
     private static final int[] VALID_VALUES = {1000, 500, 200, 100, 50, 20, 10, 5, 1};  //valid bills
 
     public Denomination(int value) {
-        if (!isValid(value)) {
-            throw new IllegalArgumentException("Denomination value is invalid" + value);
-        }
-
         this.value = value;
     }
 
@@ -33,7 +29,7 @@ public class Denomination {
     }
 
     //checks if value exists within the denominations
-    private static boolean isValid(int value) {
+    public static boolean isValid(int value) {
         //loop through all valid denominations
         for (int valid : VALID_VALUES){
             if (valid == value) {
