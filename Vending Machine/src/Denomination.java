@@ -38,14 +38,14 @@ public class Denomination {
         return values;
     }
 
-    /**
-     * Gets the value of this specific denomination instance.
-     *
-     * @return the denomination value
-     */
-    public int getValue() {
-        return this.value;
-    }
+//    /**
+//     * Gets the value of this specific denomination instance.
+//     *
+//     * @return the denomination value
+//     */
+//    public int getValue() {
+//        return this.value;
+//    }
 
     /**
      * Gets the complete list of all valid denomination values.

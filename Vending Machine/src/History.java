@@ -7,7 +7,7 @@ public class History{
     private int[] startingInventory; //array to hold item counts at the start records it here before restocking finishes
     private int[] soldPerSlot;       //counts how many were sold per slot index
 
-    private ArrayList<String> transactions;   //array to hold string messages that describe whatever occured
+    private final ArrayList<String> transactions;   //array to hold string messages that describe whatever occured
 
     /**
      * constructor that sets up the ledger that keep tracks of events.
@@ -26,7 +26,7 @@ public class History{
     /**
      * Adds a String sentence that describes the event to the event logs.
      *
-     * @param message describes the event (e.g. "Sold x pepperoni, Restocked...)
+     * @param message describes the event (e.g. Sold x pepperoni, Restocked...)
      */
     public void addLogMessage(String message){
         //add message into the ledger
@@ -51,7 +51,7 @@ public class History{
 
     /**
      * clears the ledger when a restocking is performed or a pricing change
-     * @param currentItems
+     * @param currentItems the current list of machine items present in the vending machine
      */
     public void restockPeriod(ArrayList<MachineItem> currentItems){
         int i;
@@ -68,7 +68,7 @@ public class History{
             this.soldPerSlot[i] = 0;                                    //clear out old sales log
             this.startingInventory[i] = currentItems.get(i).getStock(); //make new starting point
         }
-        addLogMessage("SYSTEM: Maintenance cycle has started! Inventory recored.");
+        addLogMessage("SYSTEM: Maintenance cycle has started! Inventory recorded.");
     }
 
     /**

@@ -1,13 +1,13 @@
 public class MachineItem {
-    private String name;
+    private final String name;
     private double price;
     private int stock;
 
     private final int maxStock = 50;
 
-    public MachineItem(String name) {
-        this.name = name;
-    }
+//    public MachineItem(String name) {
+//        this.name = name;
+//    }
 
     public MachineItem(String name, double price, int stock) {
         this.name = name;
@@ -40,18 +40,18 @@ public class MachineItem {
     }
     // endregion
     // region setters
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+//    public void setName(String name)
+//    {
+//        this.name = name;
+//    }
     public void setPrice(double price)
     {
         this.price = price;
     }
-    public void setStock(int stock)
-    {
-        this.stock = stock;
-    }
+//    public void setStock(int stock)
+//    {
+//        this.stock = stock;
+//    }
     // endregion
 
     public void transact()

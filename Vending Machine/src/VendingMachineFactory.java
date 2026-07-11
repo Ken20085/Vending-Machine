@@ -8,8 +8,8 @@ public class VendingMachineFactory {
     {
         // Variables
         boolean isDone = false;
-        boolean isTesting = false;
-        int choice;
+        boolean isTesting;
+        String choice;
         RegularVM machine = null;
 
         // Welcome Message
@@ -29,15 +29,13 @@ public class VendingMachineFactory {
             System.out.println("********************************************");
 
             System.out.print("Enter your choice (1-3): ");
-            choice = scanner.nextInt();
-
-            scanner.nextLine();
+            choice = scanner.nextLine();
 
             // Switch statement for everything
             switch(choice)
             {
                 // region case 1 - Create a Vending Machine
-                case 1:
+                case "1":
                     System.out.println();
                     System.out.println("-------------------------------------------");
                     System.out.println("What vending machine do you want to create?");
@@ -45,13 +43,11 @@ public class VendingMachineFactory {
                     System.out.println("2. Special Vending Machine");
                     System.out.println("-------------------------------------------");
                     System.out.print("Enter your choice (1-2): ");
-                    choice = scanner.nextInt();
-
-                    scanner.nextLine();
+                    choice = scanner.nextLine();
 
                     switch(choice)
                     {
-                        case 1:
+                        case "1":
                             if (machine != null)
                             {
                                 System.out.println("Deleted Vending Machine with name: " + machine.getName());
@@ -62,7 +58,7 @@ public class VendingMachineFactory {
                             System.out.println("Created Vending Machine with name: " + name);
                             break;
 
-                        case 2:
+                        case "2":
                             System.out.println("This item is currently unavailable.");
                             break;
 
@@ -76,7 +72,7 @@ public class VendingMachineFactory {
                     // endregion
 
                 // region case 2 - Test a Vending Machine
-                case 2:
+                case "2":
                     if (machine != null)
                     {
                         System.out.println("Going to testing menu...");
@@ -92,18 +88,18 @@ public class VendingMachineFactory {
                             System.out.println("3. Exit Testing");
                             System.out.println("-------------------------------------------");
                             System.out.print("Enter your choice (1-3): ");
-                            choice = scanner.nextInt();
+                            choice = scanner.nextLine();
 
                             switch(choice)
                             {
-                                case 1:
+                                case "1":
                                     System.out.println();
                                     RunVendingMachine(machine);
                                     break;
-                                case 2:
+                                case "2":
                                     ConductMaintenance(machine);
                                     break;
-                                case 3:
+                                case "3":
                                     System.out.println("Returning to main menu...");
                                     isTesting = false;
                                     break;
@@ -123,13 +119,14 @@ public class VendingMachineFactory {
                     // endregion
 
                 // region case 3 - End Program
-                case 3:
+                case "3":
                     isDone = true;
                     break;
                     // endregion
 
                 default:
                     System.out.println("Invalid choice");
+                    System.out.println();
                     break;
             }
         }
@@ -147,7 +144,8 @@ public class VendingMachineFactory {
     static void RunVendingMachine(RegularVM machine)
     {
         // Variables
-        int choice = -1;
+        String choice = "-1";
+        int choiceToInput = -1;
         double inputtedMoney;
         double lowestPrice = Double.POSITIVE_INFINITY;
         String input;
@@ -163,7 +161,6 @@ public class VendingMachineFactory {
 
         // Money Input
         System.out.println("Running Vending Machine " + machine.getName() + "...");
-        scanner.nextLine();
         machine.displayVendingMachine();
         Helper.MoneyInstructions();
         System.out.print("Input: ");
@@ -183,18 +180,19 @@ public class VendingMachineFactory {
         // Item Index Input
         machine.getRegister().displayChangePool();
         System.out.println("0 to cancel current transaction");
-        while (choice == -1)
+        while (choice.equals("-1"))
         {
             System.out.print("Index of item order: Item ");
-            choice = scanner.nextInt();
-            if (choice > machine.getItems().size() || choice <= -1)
+            choice = scanner.nextLine();
+            choiceToInput = Integer.parseInt(choice);
+            if (choiceToInput > machine.getItems().size() || choiceToInput <= -1)
             {
-                choice = -1;
+                choiceToInput = -1;
                 System.out.println("Invalid choice.");
             }
         }
 
-        if (choice == 0)
+        if (choice.equals("0"))
         {
             System.out.println();
             System.out.println("Transaction cancelled.");
@@ -204,14 +202,20 @@ public class VendingMachineFactory {
         }
 
         // Transaction stuff
-        machine.dispenseItem(choice - 1, inputtedMoney);
+        machine.dispenseItem(choiceToInput - 1, inputtedMoney);
     }
 
+    /**
+     * Tests and runs the Maintenance Functions of RegularVM machine.
+     * This method simulates how am owner maintaining a vending machine would normally go.
+     *
+     * @param machine the machine to be run maintenance functions on
+     */
     static void ConductMaintenance(RegularVM machine)
     {
         // Variables
         boolean isMaintenance = true;
-        int choice = 0;
+        String choice;
         String itemName;
 
         // Menu Instructions
@@ -232,14 +236,12 @@ public class VendingMachineFactory {
             System.out.println("6. Back to Main Menu");
             System.out.println("=======================================");
             System.out.print("Enter your choice (1-6): ");
-            choice = scanner.nextInt();
-
-            scanner.nextLine();
+            choice = scanner.nextLine();
 
             switch (choice)
             {
                 // region case 1 - Restock/Stock Item
-                case 1:
+                case "1":
                     System.out.println("Running Restock/Stock Item");
                     System.out.println();
 
@@ -264,7 +266,7 @@ public class VendingMachineFactory {
                     // endregion
 
                 // region case 2 - Set Item Price
-                case 2:
+                case "2":
                     System.out.println("Running Set Item Price");
                     System.out.println();
 
@@ -288,14 +290,14 @@ public class VendingMachineFactory {
                     // endregion
 
                 // region case 3 - Collect Money
-                case 3:
+                case "3":
                     System.out.println("Running Collect Money");
                     machine.CollectMoney();
                     break;
                     // endregion
 
                 // region case 4 - Replenish Change Pool
-                case 4:
+                case "4":
                     Helper.MoneyInstructions();
                     System.out.print("Input: ");
                     String input = scanner.nextLine();
@@ -307,16 +309,19 @@ public class VendingMachineFactory {
                 // endregion
 
                 // region case 5 - Print Transaction Summary
-                case 5:
+                case "5":
                     machine.history.printReport(machine.getItems());
                     break;
                 // endregion
 
-                case 6:
+                // region case 6 - Back to Main Menu
+                case "6":
                     isMaintenance = false;
                     break;
+                    // endregion
+
                 default:
-                    System.out.println("Invalid choice.");;
+                    System.out.println("Invalid choice.");
                     break;
             }
         }

@@ -3,22 +3,27 @@ import java.util.Objects;
 
 public class Helper {
 
-    public static void DisplayAllItems(RegularVM machine)
-    {
-        int i = 0;
+//    public static void DisplayAllItems(RegularVM machine)
+//    {
+//        int i = 0;
+//
+//        System.out.println("Items");
+//        for (MachineItem item : machine.getItems())
+//        {
+//            i++;
+//            System.out.println(i + ". " + item.getName());
+//        }
+//    }
 
-        System.out.println("Items");
-        for (MachineItem item : machine.getItems())
-        {
-            i++;
-            System.out.println(i + ". " + item.getName());
-        }
-    }
-    public static void MachineDebugInfo(RegularVM machine)
-    {
-
-    }
-
+    /**
+     * Parses a formatted input function into data to be inputted into a list of integers
+     * representing counts for denominations. It also returns how much was parsed.
+     *
+     * @param input the string that was inputted
+     * @param machine the machine with
+     * @param type 1 if parsing into changePool, 2 if parsing into moneyGotten
+     * @return total amount parsed
+     */
     public static double parseMoney(String input, RegularVM machine, int type)
     {
         double result = 0;
@@ -40,6 +45,12 @@ public class Helper {
         return result;
     }
 
+    /**
+     *
+     * @param input
+     * @param machine
+     * @param type
+     */
     public static void undoParse(String input, RegularVM machine, int type)
     {
         String[] tokens = input.split(" ");

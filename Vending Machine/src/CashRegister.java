@@ -8,8 +8,8 @@ import java.util.Arrays;
  */
 public class CashRegister {
     /** int array tracking how much of the denomination/bills are held */
-    private ArrayList<Integer> changePool;
-    private ArrayList<Integer> moneyGotten;
+    private final ArrayList<Integer> changePool;
+    private final ArrayList<Integer> moneyGotten;
 
     /**
      * Constructs an empty CashRegister. This array scales to match the number
@@ -33,12 +33,9 @@ public class CashRegister {
      */
     private void initializeChangePool()
     {
-        int i = 0;
-
         for (int denominations : Denomination.getValidValues())
         {
-            addCash(denominations, 20, 1);
-            i++;
+            addCash(denominations, 0, 1);
         }
     }
 
@@ -74,11 +71,11 @@ public class CashRegister {
     }
 
     /**
-     * Determines the matching index for a inputted value.
+     * Determines the matching index for an inputted value.
      * Used internally to locate where denomination bills are stored in the
      * arrays.
      *
-     * @param value the numeric value of the denomination (e.g. 50, 20, 10, ..., etc)
+     * @param value the numeric value of the denomination (e.g. 50, 20, 10, ..., etc.)
      * @return index of array if found ; -1 if value is an invalid denomination
      */
     private int findDenominationIndex(int value){

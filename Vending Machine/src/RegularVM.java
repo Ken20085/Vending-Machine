@@ -3,10 +3,9 @@ import java.util.ArrayList;
 public class RegularVM {
 
     private final String name;
-    private ArrayList<MachineItem> items = new ArrayList<>();
+    private final ArrayList<MachineItem> items = new ArrayList<>();
     private int itemCount;
     CashRegister register = new CashRegister();
-
     History history;
 
     public RegularVM(String name)
@@ -69,8 +68,6 @@ public class RegularVM {
                 2));
 
         this.itemCount = items.size();
-
-        // Generate Restock Log Here
     }
 
     public void RestockItem(String itemName, int quantity)
@@ -103,7 +100,7 @@ public class RegularVM {
     {
         // Variables
         MachineItem itemToReprice = Helper.findItem(itemName, items);
-        double previousPrice = 0;
+        double previousPrice;
         int index = items.indexOf(Helper.findItem(itemName, items));
 
         // Modify itemToRestock
@@ -167,7 +164,7 @@ public class RegularVM {
 
     public void displayVendingMachine()
     {
-        int i = 0;
+        int i;
         int maxSpace = 33;
         int leftPad = name.length() + (maxSpace - name.length()) / 2;
         String nameFormat = String.format("%" + leftPad + "s", name);
