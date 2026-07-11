@@ -6,7 +6,7 @@ import java.util.Arrays;
  * is accepted as a denomination.
  */
 public class Denomination {
-    private final int value;
+    private final int VALUE;
 
     /** Standard accepted/valid denominations from highest to lowest */
     private static final ArrayList<Integer> VALID_VALUES = initializeValidValues();
@@ -18,7 +18,7 @@ public class Denomination {
      */
     public Denomination(int value)
     {
-        this.value = value;
+        this.VALUE = value;
     }
 
     private static ArrayList<Integer> initializeValidValues()
@@ -44,7 +44,7 @@ public class Denomination {
      * @return the denomination value
      */
     public int getValue() {
-        return this.value;
+        return this.VALUE;
     }
 
     /**

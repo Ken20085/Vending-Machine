@@ -1,16 +1,20 @@
 import java.util.ArrayList;
 
 /**
- * Represents the
+ * Represents the transaction history and the inventory snapshot for the vending machine.
+ * This class monitors changes in stock levels between cycles
  */
 public class History{
-    private int[] startingInventory; //array to hold item counts at the start records it here before restocking finishes
-    private int[] soldPerSlot;       //counts how many were sold per slot index
+    /** Array to hold item counts at the start records it here before restocking finishes */
+    private int[] startingInventory;
 
-    private ArrayList<String> transactions;   //array to hold string messages that describe whatever occured
+    /** Array to count how many were sold per slot index */
+    private int[] soldPerSlot;
 
+    /** Array to hold string messages that describe whatever occured */
+    private ArrayList<String> transactions;
     /**
-     * constructor that sets up the ledger that keep tracks of events.
+     * Constructor that sets up the ledger that keep tracks of events.
      *
      * @param numberOfItemSlots how many items the machine has (in this case 8)
      */
@@ -34,7 +38,7 @@ public class History{
     }
 
     /**
-     * called when a transaction is made to record the sale.
+     * Called when a transaction is made to record the sale.
      *
      * @param slotIndex position of the item in the ArrayList
      * @param itemName string name of the item
@@ -50,8 +54,9 @@ public class History{
     }
 
     /**
-     * clears the ledger when a restocking is performed or a pricing change
-     * @param currentItems
+     * Clears the ledger when a restocking is performed or a pricing change
+     *
+     * @param currentItems the collection of managaed vending machine items
      */
     public void restockPeriod(ArrayList<MachineItem> currentItems){
         int i;
@@ -72,7 +77,9 @@ public class History{
     }
 
     /**
-     * prints out report for the admin
+     * Prints out transactional report for the admin.
+     * Computes real-time gross revenue metrics and displays log operations.
+     *
      * @param currentItems live amount of items to calculate the ending stock
      */
     public void printReport(ArrayList<MachineItem> currentItems){

@@ -29,7 +29,7 @@ public class CashRegister {
     }
 
     /**
-     * Initializes denomination counts within the change pool
+     * Initializes denomination counts within the change pool.
      */
     private void initializeChangePool()
     {
@@ -218,7 +218,7 @@ public class CashRegister {
     }
 
     /**
-     * checks to see if there is enough change to give out within the change pool
+     * Checks to see if there is enough change to give out within the change pool.
      *
      * @param change total numeric value needed for the transaction
      * @return true if the cash within the vending machine can cover the value;
