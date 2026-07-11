@@ -7,30 +7,40 @@ import java.util.Arrays;
  */
 public class CashRegister {
     /** int array tracking how much of the denomination/bills are held */
-    private int[] changePool;
-    private int[] moneyGotten;
+    private ArrayList<Integer> changePool;
+    private ArrayList<Integer> moneyGotten;
 
     /**
      * Constructs an empty CashRegister. This array scales to match the number
      * of accepted denominations.
      */
     public CashRegister() {
-        this.changePool = new int[Denomination.getValidValues().length];
-        this.moneyGotten = new int[Denomination.getValidValues().length];
+        int i;
+        int denominationLength = Denomination.getValidValues().length;
+        this.changePool = new ArrayList<>(denominationLength);
+        this.moneyGotten = new ArrayList<>(denominationLength);
+
+        for (i = 0; i < denominationLength; i++) {
+            this.changePool.add(0);
+            this.moneyGotten.add(0);
+        }
         initializeChangePool();
     }
 
+    /**
+     * Initializes denomination counts within the change pool
+     */
     private void initializeChangePool()
     {
-//        int i = 0;
-//
-//        for (int denominations : Denomination.getValidValues())
-//        {
-//            System.out.println(denominations);
-//            addCash(denominations, 1, 1);
-//            i++;
-//            System.out.println("change pool: " + changePool[i - 1]);
-//        }
+        int i = 0;
+
+        for (int denominations : Denomination.getValidValues())
+        {
+            System.out.println(denominations);
+            addCash(denominations, 1, 1);
+            i++;
+            System.out.println("change pool: " + changePool[i - 1]);
+        }
 
         addCash(1000, 20, 1);
         addCash(500, 1, 1);
@@ -170,6 +180,13 @@ public class CashRegister {
         return total;
     }
 
+    /**
+     * checks to see if there is enough change to give out within the change pool
+     *
+     * @param change total numeric value needed for the transaction
+     * @return true if the cash within the vending machine can cover the value;
+     * false otherwise
+     */
     public boolean changeIsPossible(double change)
     {
         int currentChange = 0;
@@ -189,6 +206,9 @@ public class CashRegister {
         return change <= currentChange;
     }
 
+    /**
+     * Displays the amount of change currently available in the change pool
+     */
     public void displayChangePool()
     {
         int i = 0;
