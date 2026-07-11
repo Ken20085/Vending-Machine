@@ -1,13 +1,33 @@
 import java.util.ArrayList;
 
+/**
+ * Represents the main controller for a Regular Vending Machine system.
+ * This class orchestrates operations between inventory management (MachineItem),
+ * internal cash reserves (CashRegister), and structural ledger logging (History).
+ */
 public class RegularVM {
 
+    /** The descriptive display name of this vending machine instance */
     private final String name;
-    private final ArrayList<MachineItem> items = new ArrayList<>();
-    private int itemCount;
-    CashRegister register = new CashRegister();
-    History history;
 
+    /** The central inventory engine storing all item slots available for purchase */
+    private final ArrayList<MachineItem> items = new ArrayList<>();
+
+    /** The total count of active item slots configured in this machine */
+    private int itemCount;
+
+    /** Enforces composition: The core physical cash handling register for the machine */
+    private CashRegister register = new CashRegister();
+
+    /** Enforces composition: The transaction history ledger tracking state boundaries */
+    private History history;
+
+    /**
+     * Constructs and initializes a Regular Vending Machine with factory preset items.
+     * Establishes the baseline history tracker upon configuration.
+     *
+     * @param name the descriptive identity string for the machine instance
+     */
     public RegularVM(String name)
     {
         this.name = name;
@@ -16,12 +36,34 @@ public class RegularVM {
         history.restockPeriod(items);
     }
 
+    /**
+     * Retrieves the display identity name of the vending machine.
+     *
+     * @return the machine name string
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * Exposes the internal register subsystem for currency manipulation.
+     *
+     * @return the CashRegister instance managed by this machine
+     */
     public CashRegister getRegister() {return register;}
+
+    /**
+     * Retrieves the aggregate volume of slots allocated in the inventory system.
+     *
+     * @return the total count of item slots
+     */
     public int getItemCount() {return itemCount;}
 
+    /**
+     * Retrieves the full structural container tracking all managed machine items.
+     *
+     * @return an ArrayList containing all active MachineItem profiles
+     */
     public ArrayList<MachineItem> getItems()
     {
         return this.items;
@@ -32,6 +74,10 @@ public class RegularVM {
 //        items.add(item);
 //    }
 
+    /**
+     * Populates the internal slots with default initial toppings and quantities
+     * to fulfill starting operational system baselines.
+     */
     public void GeneratePresetItems()
     {
         items.add(new MachineItem(
@@ -70,6 +116,13 @@ public class RegularVM {
         this.itemCount = items.size();
     }
 
+    /**
+     * Restocks a specific item slot by matching its descriptive name identifier.
+     * Refreshes historical snapshots if validation constraints are passed cleanly.
+     *
+     * @param itemName the case-sensitive string identifier of the product
+     * @param quantity the positive integer volume to increment the slot stock by
+     */
     public void RestockItem(String itemName, int quantity)
     {
         // Variables
@@ -91,11 +144,21 @@ public class RegularVM {
         if (successfulRestock) history.restockPeriod(items);
     }
 
+    /**
+     * Performs an administrative collection sweep, accessing collected earnings
+     * captured during completed user sales.
+     */
     public void CollectMoney()
     {
         this.register.getMoneyGotten();
     }
 
+    /**
+     * Updates the retail pricing configuration of a managed product unit.
+     *
+     * @param itemName the string name of the item to modify
+     * @param price    the new integer cost baseline to push to the item structure
+     */
     public void SetItemPrice(String itemName, int price) // Incomplete
     {
         // Variables
@@ -121,6 +184,13 @@ public class RegularVM {
         // Add to Restock Log
     }
 
+    /**
+     * Evaluates payment metrics, processes product allocation decreases,
+     * and triggers cash dispensing sequences for a product transaction.
+     *
+     * @param itemIndex  the numerical slot address targeted by the consumer
+     * @param inputMoney the monetary raw payment inserted by the customer
+     */
     public void dispenseItem(int itemIndex, double inputMoney)
     {
         // Variables
@@ -152,6 +222,11 @@ public class RegularVM {
         }
     }
 
+    /**
+     * Internal formatting helper to isolate and print receipt breakdowns post-purchase.
+     *
+     * @param itemIndex the position of the product inside the array layout
+     */
     private void generatePurchaseSummary(int itemIndex)
     {
         System.out.println("Generating purchase summary...");
@@ -162,6 +237,10 @@ public class RegularVM {
         System.out.println("Have a nice day!");
     }
 
+    /**
+     * Formats and prints a structured, high-visibility storefront grid display
+     * representing the item inventory status to consumers.
+     */
     public void displayVendingMachine()
     {
         int i;
@@ -193,6 +272,10 @@ public class RegularVM {
         System.out.println("* * * * * * * * * * * * * * * * * * *");
     }
 
+    /**
+     * Administrative print utility showing raw underlying class properties
+     * for tracking data consistency during system validation routines.
+     */
     public void displayDebugInfo()
     {
         // Print Current Items with their stock and price

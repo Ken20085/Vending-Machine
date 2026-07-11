@@ -215,7 +215,7 @@ public class CashRegister {
     }
 
     /**
-     * checks to see if there is enough change to give out within the change pool
+     * Checks to see if there is enough change to give out within the change pool.
      *
      * @param change total numeric value needed for the transaction
      * @return true if the cash within the vending machine can cover the value;
@@ -241,7 +241,7 @@ public class CashRegister {
     }
 
     /**
-     * Displays the amount of change currently available in the change pool
+     * Displays the amount of change currently available in the change pool.
      */
     public void displayChangePool()
     {
